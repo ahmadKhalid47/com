@@ -1,0 +1,115 @@
+<%-include('mainHeader')-%>
+<div class="bg-dark">
+    <div class="container-fluid bg-primary">
+        <h1 class="p-5 pb-3">Upload Products:</h1>
+        <form action="/admin/<%=info_obj._id%>" method="post" class="row justify-content-center" enctype="multipart/form-data">
+            <div class="col-lg-3 col-10 mx-5 mb-3">
+                <label class="form-label h2 mb-3">Upload image</label>
+                <input class="form-control mb-3" type="file" name="image">
+            </div>
+            <div class="col-lg-3 col-10 mx-5 mb-3">
+                <label class="form-label h2 mb-3">Details</label>
+                <input class="form-control mb-3" type="text" name="Details" required>
+            </div>
+            <div class="col-lg-3 col-10 mx-5 mb-3">
+                <label class="form-label h2 mb-3">Quantity</label>
+                <input class="form-control mb-3" type="number" name="Quantity" required>
+            </div>
+            <div class="col-lg-3 col-10 mx-5 mb-3">
+                <label class="form-label h2 mb-3">Price</label>
+                <input class="form-control mb-3" type="number" name="Price" required>
+            </div>
+            <div class="col-lg-3 col-10 mx-5 mb-3">
+                <label class="form-label h2 mb-3">Brand</label>
+                <input class="form-control mb-3" type="text" name="Brand" required>
+            </div>
+            <div class="col-lg-3 col-10 mx-5 mb-3">
+                <label class="form-label h2 mb-3">Color</label>
+                <input class="form-control mb-3" type="text" name="Color" required>
+            </div>
+            <button type="submit" class="col- btn btn-lg btn-success rounded-0">submit</button>
+        </form>
+    </div>
+    <div class="container-fluid uplaoded">
+        <h1 class="px-5 pt-5 text-light">uploaded: </h1>
+        <div class="row my-4">
+            <%info_obj.product_id1.forEach((product) => {%>
+                <div class="p-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="card p-4">
+                        <img src="/<%=product.Image%>" class="card-img-top" style="width: 100%; height: 100%;">
+                        <div class="card-body">
+                            <h4 class="card-text"><%=product.Details%></h4>
+                        </div>
+                        <h3 class="my-3">Quantity availble: <span><%=product.Quantity%></span> </h3>
+                        <button class="delete btn btn-lg btn-danger rounded-0" style="display: block;">delete</button>
+                        <div style="display: none;" class="sure container-fluid flex-column">
+                            <h5>are you sure ?</h5>
+                            <a class="btn btn-lg btn-success rounded-0" href="/delete/<%=product._id%>">yes</a>
+                            <button class="no btn btn-lg btn-danger rounded-0">no</button>
+                        </div>
+                    </div>
+                </div>
+            <%})%>
+        </div>
+    </div>
+    <div class="container-fluid uplaoded">
+        <h1 class="px-5 pt-5 text-light">Orders: </h1>
+        <div class="row my-4">
+            <%for(let i=0; i<info_obj.order.length; i++) {%>
+                <div class="p-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="card p-4">
+                        <img src="/<%=info_obj.order[i].product_Image%>" class="card-img-top" style="width: 100%; height: 100%;">
+                        <div class="card-body">
+                            <h3 class="card-text">Product details: <%=info_obj.order[i].product_Detail%></h3>
+                            <h3 class="card-text">Customer details:</h3>
+                            <h6 class="card-text">Name: <%=info_obj.order[i].name%></h6>
+                            <h6 class="card-text">Phone: <%=info_obj.order[i].phone%></h6>
+                            <h6 class="card-text">Address: <%=info_obj.order[i].address%></h6>
+                        </div>
+                        <button class="delivered btn btn-lg btn-primary rounded-0" style="display: block;">delivered</button>
+                        <div style="display: none;" class="sure2 container-fluid flex-column">
+                            <h5>are you sure ?</h5>
+                            <a class="btn btn-lg btn-success rounded-0" href="/delivered/<%=info_obj.order[i]._id%>">yes</a>
+                            <button class="no2 btn btn-lg btn-danger rounded-0">no</button>
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+        </div>
+    </div>
+</div>
+
+<script>
+    let del = document.querySelectorAll(".delete");
+    let delivered = document.querySelectorAll(".delivered");
+
+    del.forEach((del1) => {
+        let sure = del1.parentElement.querySelector(".sure");
+        let no = del1.parentElement.querySelector(".sure .no");
+
+        del1.onclick = function () {
+            del1.style.display = "none";
+            sure.style.display = "flex";
+        }
+        no.onclick = function () {
+            del1.style.display = "flex";
+            sure.style.display = "none";
+        }
+    })
+    
+    delivered.forEach((delivered1)=>{
+        let sure2= delivered1.parentElement.querySelector(".sure2");
+        let no2 = delivered1.parentElement.querySelector(".sure2 .no2");
+
+        delivered1.onclick = function () {
+            delivered1.style.display = "none";
+            sure2.style.display = "flex";
+        }
+        no2.onclick = function () {
+            delivered1.style.display = "flex";
+            sure2.style.display = "none";
+        }    
+    })
+
+</script>
+<%-include('mainFooter')-%>

@@ -1,0 +1,38 @@
+<%-include('mainHeader')-%>
+<div class="bg-dark container-fluid" style="display: flex; align-items: center;">
+    <div class="container-sm py-5">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-lg-6 bg-light p-0">
+                <img src="/<%=info_obj.finded.Image%>" style="width: 100%; height: 100%;">
+            </div>
+            <div class="col-sm-12 col-lg-6 bg-light pt-2 p-5 d-flex flex-column justify-content-between">
+                <div>
+                    <h2 class="my-3"><%=info_obj.finded.Details%></h2>
+                    <h2 class="my-3 display-3">Price: <span><%=info_obj.finded.Price%>$</span></h2>
+                    <h5 class="my-3">Color: <span class="fw-light"><%=info_obj.finded.Color%></span></h5>
+                    <h5 class="my-3">Brand: <span class="fw-light"><%=info_obj.finded.Brand%></span></h5>
+                    <h5 class="my-3">available pieces: <span class="fw-light"> <%=info_obj.finded.Quantity%></span></h5>
+                </div>
+                <div class="my-1">
+                    <form action="" method="">
+                        <a id="add" href="/addToCart/<%=info_obj.finded._id%>/<%=info_obj._id%>" class="container btn btn-lg btn-success my-1"><%=info_obj.response%></a>
+                        <button id="remove" type="button" class="container btn btn-lg btn-secondary my-1" disabled>added to cart</button>
+                    </form>
+                    <a href="/buy/<%=info_obj.finded._id%>/<%=info_obj._id%>" class="container btn btn-lg btn-warning mt-1">Buy now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let add= document.getElementById("add")
+    let remove= document.getElementById("remove")
+    if(add.innerHTML=="added"){
+        add.style.display="none";
+        remove.style.display="block";
+    }else{
+        add.style.display = "block";
+        remove.style.display = "none";
+    }
+</script>
+<%-include('mainFooter')-%>

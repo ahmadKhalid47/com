@@ -1,0 +1,61 @@
+<%-include('register_page_header')-%>
+
+<div class="bg-warning p-4 rounded" style="width: min(50vh,90vw)">
+    <h1 class="mb-4 display-1">sign up</h1>
+    <form action="/signUp" method="post" id="form">
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="Email" name="email">
+            <p class="pt-1 px-3 text-danger fw-normal" id="emailErorr"></p>
+        </div>
+        <div class="mb-3">
+            <label for="Password1" class="form-label">create Password</label>
+            <input type="password" class="form-control" id="Password1" name="password1">
+            <p class="pt-1 px-3 text-danger fw-normal" id="passwordError1"></p>
+        </div>
+        <div class="mb-4">
+            <label for="Password2" class="form-label">re-write Password</label>
+            <input type="password" class="form-control" id="Password2" name="password2">
+            <p class="pt-1 px-3 text-danger fw-normal" id="passwordError2"></p>
+        </div>
+        <button type="button" class="float-end btn btn-primary" id="button">Submit</button>
+        <a href="/">login</a>
+        <p class="pb-0 p-3 text-danger fw-normal"><%=alreadyPresent%></p>
+    </form>
+</div>
+
+<script>
+    let Email = document.getElementById('Email')
+    let Password1 = document.getElementById('Password1')
+    let Password2 = document.getElementById('Password2')
+    let button = document.getElementById('button');
+    let form = document.getElementById('form');
+    let emailErorr = document.getElementById('emailErorr');
+    let passwordError1 = document.getElementById('passwordError1');
+    let passwordError2 = document.getElementById('passwordError2');
+    
+    button.onclick=function(){
+        emailErorr.innerHTML="";
+        passwordError1.innerHTML="";
+        passwordError2.innerHTML="";
+        if (Email.value.trim() == "" || Password1.value.trim() == "" || Password1.value != Password2.value) {
+            if (Email.value.trim() == "") {
+                emailErorr.innerHTML = "*enter email";
+            } else if (Password1.value.trim() == "") {
+                passwordError1.innerHTML = "*enter password";
+            } else if (Password1.value != Password2.value) {
+                passwordError2.innerHTML = "*password not matched";
+            }
+        } else {
+            form.submit();
+        }
+    }
+    form.onkeyup= function(){
+        if(event.keyCode === 13){
+            button.click();
+        }
+    }
+
+</script>
+
+<%-include('register_page_footer')-%>

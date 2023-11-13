@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <h1 class="p-5">Your Payment was made, your order will be placed in few days</h1>
+    <button id="button" class="btn btn-primary btn-lg m-5">go back</button>
+
+<script>
+    let button = document.getElementById("button");
+    button.onclick=function(){
+        history.go(-3)
+    }
+</script>
+
+</body>
+</html>

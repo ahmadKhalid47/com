@@ -1,0 +1,82 @@
+<%-include('mainHeader')-%>
+
+<div class="py-5">
+    <%for(let i=0; i<info_obj.notification.length; i++){%>
+        <div class="d-flex mx-2 my-1 align-items-center justify-content-evenly" style="height: 10vh;">
+            <div class="me-2 h-100 d-flex align-items-center" style="width: 40%;">
+                <img style="height: 10vh; width: 10vh;" src="/<%=info_obj.notification[i].image%>">
+                <h6 class="ms-3"><%=info_obj.notification[i].detail%></h6>
+            </div>
+            <h6>your order has been placed to your location</h6>
+            <h6>Date: <%=info_obj.notification[i].date%></h6>
+        </div>
+        <div class="ratings m-4 d-flex justify-content-between">
+            <input id="messege" type="text" value="<%=info_obj.checker[i]%>">
+            <h4>please rate our product </h4>
+            <div class="h4">
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+            </div>
+            <form action="/rating/<%=info_obj.notification[i].detail%>/<%=info_obj._id%>" method="post">
+                <input id="input" type="hidden" name="input" value=0>
+                <button type="submit" id="button" disabled class="btn btn-success btn-sm px-4">submit</button>
+            </form>
+        </div>
+    <%}%>
+</div>
+
+<script>
+    let ratings=document.querySelectorAll(".ratings");
+    for(let r=0; r<ratings.length; r++){
+        let i=ratings[r].querySelectorAll("i");
+        let input=ratings[r].querySelector("#input");
+        let button = ratings[r].querySelector("#button");
+        let rating=0;
+    let temp=[0,0,0,0,0];
+    for (let j = 0; j < i.length; j++) {
+        temp[j]=0;
+        i[j].onclick=function(){
+            if(temp[j]==0){
+                if(i[j].classList.contains('fa-regular')){
+                    for (let k = j; k >= 0; k--) {
+                        i[k].classList.remove('fa-regular');
+                        i[k].classList.add('fa-solid');
+                    }
+                }else if(i[j].classList.contains('fa-solid')){
+                    for (let k = j+1; k <= 4; k++) {
+                        i[k].classList.remove('fa-solid');
+                        i[k].classList.add('fa-regular');
+                    }            
+                }
+                temp.fill(0)
+                temp[j] = 1;
+                rating = j+1;
+            }else if(temp[j]==1) {
+                for (let k = 0; k <= 4; k++) {
+                    i[k].classList.remove('fa-solid');
+                    i[k].classList.add('fa-regular');
+                }
+                rating = 0;
+                temp.fill(0)
+            }
+            if(i[j].classList.contains("fa-solid")){
+                button.disabled=false;
+            }else if (!i[j].classList.contains("fa-solid")){
+                button.disabled=true;
+            }
+            input.value=rating;
+        }
+    }
+    let messege= ratings[r].querySelector("#messege");
+    if(messege.value=="none"){
+        ratings[r].innerHTML=""
+    }
+    console.log(ratings[r])
+}
+
+</script>
+
+<%-include('mainFooter')-%>

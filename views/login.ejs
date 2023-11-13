@@ -1,0 +1,50 @@
+<%-include('register_page_header')-%>
+
+<div class="bg-warning p-4 rounded" style="width: min(50vh,90vw)">
+    <h1 class="mb-4 display-1">Log in</h1>
+    <form action="/" method="post" id="form">
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="Email" name="email" id="Email">
+            <p class="pb-0 p-3 text-danger fw-normal" id="emailErorr"></p>
+        </div>
+        <div class="mb-4">
+            <label for="Password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="Password" name="password" id="Password">
+            <p class="pb-0 p-3 text-danger fw-normal" id="passwordError"><%=loginErrors.wrongPassword%></p>
+        </div>
+        <button type="button" class="float-end btn btn-primary" id="button">Submit</button>
+        <a href="/signUp">sign-up</a>
+        <p class="pb-0 p-3 text-danger fw-normal"><%=loginErrors.notPresent%></p>
+    </form>
+</div>
+
+<script>
+    let form = document.getElementById('form');
+    let Email = document.getElementById('Email')
+    let Password = document.getElementById('Password')
+    let button = document.getElementById('button');
+    let emailErorr = document.getElementById('emailErorr');
+    let passwordError = document.getElementById('passwordError');
+
+    button.onclick=function(){
+        emailErorr.innerHTML="";
+        passwordError.innerHTML="";
+        if (Email.value.trim() == "" || Password.value.trim() == "") {
+            if (Email.value.trim() == "") {
+                emailErorr.innerHTML = "*enter email";
+            } else if (Password.value.trim() == "") {
+                passwordError.innerHTML = "*enter password";
+            }
+        } else {
+            form.submit();
+        }
+    }
+    form.onkeyup= function(){
+        if(event.keyCode === 13){
+            button.click();
+        }
+    }
+</script>
+
+<%-include('register_page_footer')-%>

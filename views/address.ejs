@@ -1,0 +1,31 @@
+<%-include('mainHeader')%>
+
+<div class="container">
+    <div class="row justify-content-center py-5">
+        <form class="col col-lg-6 col-md-7 col-sm-10 col-11" action="/buy/<%=info_obj._id%>/<%=info_obj.product_id%>" method="post" id="form">
+            <div class="mb-3">        
+                <label for="name" class="form-label">name</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">phone</label>
+                <input type="number" class="form-control" id="phone" name="phone">
+            </div>
+            <div class="mb-4">
+            <label for="address" class="form-label">address</label>
+                <input type="text" class="form-control" id="address" name="address">
+            </div>
+            <button type="submit" class="float-end btn btn-primary" id="sub_button">Submit</button>
+            <button type="button" class="btn btn-danger" id="button">back</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    let button = document.getElementById("button");
+    button.onclick = function () {
+        history.back()
+    }
+</script>
+
+<%-include('mainFooter')%>

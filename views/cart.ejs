@@ -1,0 +1,28 @@
+<%-include('mainHeader')-%>
+<div style="background-color: tomato;">
+    <div class="container-fluid">
+        <h1 class="container display-1 fw-bold">cart</h1>
+        <div class="row my-4">
+            <%info_obj.cart_array1.forEach((cart_array) => {%>
+                <div class="p-4 col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="card p-4">
+                        <img src="/<%=cart_array.Image%>" class="card-img-top" style="width: 100%; height: 100%;">
+                        <div class="card-body">
+                            <h4 class="card-text"><%=cart_array.Details%></h4>
+                        </div>
+                        <div class="my-1">
+                            <div class="">
+                                <a href="/buy/<%=info_obj._id%>/<%=info_obj._id%>" class="container btn btn-lg btn-warning mt-1">Buy now</a>
+                                <!-- <button type="submit" class="container btn btn-md btn-warning mt-1">Buy now</button> -->
+                            </div>
+                            <div>
+                                <a href="/removeCart/<%=cart_array._id%>/<%=info_obj._id%>" class="container btn btn-md btn-danger my-1">remove from cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <%})%>
+        </div>
+    </div>
+</div>
+<%-include('mainFooter')-%>
