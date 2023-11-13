@@ -13,7 +13,11 @@ PayPal.configure({
     "EJPza5YQ9TIUVUig4qf_zHuP4J3WDRH8QrbdipMrNWfBKmiUBqxHksxoRyUNt9VLQllIJHmIPCP78e1c",
 });
 
-mongoose.connect("mongodb://127.0.0.1:27017/user", {
+const uri =
+  "mongodb+srv://ahmadrazakhalid110:oOAi1LGYaD8vQN1y@cluster0.cr0kdsf.mongodb.net/?retryWrites=true&w=majority";
+
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
